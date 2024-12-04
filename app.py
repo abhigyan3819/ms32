@@ -60,7 +60,7 @@ def command():
                 for task in tasks["tasks"]:
                     exe = datetime.strptime(task["execution_time"], "%d-%m-%Y %H:%M")
                     exe = exe.strftime("%d-%m-%Y %H:%M")
-                    now = datetime.now().strftime("%d-%m-%Y %H:%M")
+                    now = datetime.now(timezone).strftime("%d-%m-%Y %H:%M")
                     if exe <= now:
                         cmd = task["cmd"]
                         return cmd
