@@ -49,6 +49,7 @@ def command():
         if os.path.exists(message_file):
             with open(message_file, "r") as file:
                 cmd = file.read()
+                return "read"
         if cmd == "":
             if os.path.exists(tasks_file):
                 with open(tasks_file, "r") as file:
