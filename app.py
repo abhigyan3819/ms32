@@ -56,6 +56,7 @@ def command():
                     tasks = json.load(file)
                 tasks_to_delete = None
                 for task in tasks["tasks"]:
+                    return "checking"
                     if datetime.strptime(task["execution_time"], "%d-%m-%Y %H:%M") <= datetime.now().strftime("%d-%m-%Y %H:%M"):
                         cmd = task["cmd"]
                         tasks_to_delete = task["id"]
