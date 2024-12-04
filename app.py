@@ -65,6 +65,7 @@ def command():
                         json.dump(tasks, file, indent=4)
                 with open(message_file, "w") as file:
                     file.write("")
+                    return "clear"
         return cmd
 
 @app.route("/audio", methods=["POST", "GET"])
