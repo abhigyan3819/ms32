@@ -135,7 +135,7 @@ def schedule():
         data = {"tasks": []}
         cmd = request.form["task"]
         time = datetime.now().strftime("%d-%m-%Y %H:%M")
-        execution_time = datetime.strptime(request.form["task-datetime"], "%Y-%m-%dT%H:%M").strftime("%d-%m-%Y %H:%M")
+        execution_time = datetime.strptime(request.form["task-datetime"], "%Y-%m-%d %H:%M")
         tasks_file = os.path.join(STATIC_FOLDER, "tasks.json")
         try:
             if os.path.exists(tasks_file):
