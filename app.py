@@ -56,7 +56,7 @@ def command():
             if os.path.exists(tasks_file):
                 with open(tasks_file, "r") as file:
                     tasks = json.load(file)
-                    return "tasks"
+                    return tasks
 
                 tasks_to_delete = None
                 for task in tasks["tasks"]:
