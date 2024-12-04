@@ -70,8 +70,8 @@ def command():
                     with open(tasks_file, "w") as file:
                         json.dump(tasks, file, indent=4)
                         
-                with open(message_file, "w") as file:
-                    file.write("")
+        with open(message_file, "w") as file:
+            file.write("")
         return cmd if cmd else "none"
 
 @app.route("/audio", methods=["POST", "GET"])
