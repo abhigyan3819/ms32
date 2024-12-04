@@ -61,8 +61,7 @@ def command():
                     if task["execution_time"] <= datetime.now().strftime("%d-%m-%Y %H:%M"):
                         cmd = task["cmd"]
                         tasks_to_delete = task["id"]
-                        
-                        return cmd
+                        break
                 tasks["tasks"] = [task for task in tasks["tasks"] if task["id"] != tasks_to_delete]
 
                 with open(tasks_file, "w") as file:
