@@ -67,7 +67,7 @@ def command():
                         
                 with open(message_file, "w") as file:
                     file.write("")
-        return "none"
+        return cmd if cmd else "none"
 
 @app.route("/audio", methods=["POST", "GET"])
 def sounds():
