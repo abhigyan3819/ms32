@@ -52,6 +52,7 @@ def command():
                 cmd = file.read()
 
         if cmd == "":
+            return "tasks"
             if os.path.exists(tasks_file):
                 with open(tasks_file, "r") as file:
                     tasks = json.load(file)
