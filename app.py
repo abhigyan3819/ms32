@@ -57,7 +57,11 @@ def command():
                 tasks_to_delete = None
                 for task in tasks["tasks"]:
                     return "checking"
-                    if datetime.strptime(task["execution_time"], "%d-%m-%Y %H:%M") <= datetime.now().strftime("%d-%m-%Y %H:%M"):
+                    exe = datetime.strptime(task["execution_time"], "%d-%m-%Y %H:%M")
+                    exe = exe.strftime("%d-%m-%Y %H:%M")
+                    now = datetime.now().strftime("%d-%m-%Y %H:%M")
+
+                    if exe <= now:
                         cmd = task["cmd"]
                         tasks_to_delete = task["id"]
                         break
