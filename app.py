@@ -56,15 +56,15 @@ def command():
             if os.path.exists(tasks_file):
                 with open(tasks_file, "r") as file:
                     tasks = json.load(file)
-                    return tasks
+                    
 
                 tasks_to_delete = None
                 for task in tasks["tasks"]:
                     if task["execution_time"] <= datetime.now().strftime("%d-%m-%Y %H:%M"):
                         cmd = task["cmd"]
-                        print("tasks")
+                        
                         tasks_to_delete = task["id"]
-                        break
+                        return cmd
                 tasks["tasks"] = [task for task in tasks["tasks"] if task["id"] != tasks_to_delete]
 
                 with open(tasks_file, "w") as file:
