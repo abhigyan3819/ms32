@@ -3,11 +3,11 @@ from time import time
 from flask import Flask, render_template, request, redirect, jsonify
 from datetime import datetime
 import json
-import pytz
+from zoneinfo import ZoneInfo
 
 app = Flask(__name__)
 
-timezone = pytz.timezone("Asia/Kolkata")
+timezone = ZoneInfo("Asia/Kolkata")
 startTime = time()
 
 # Ensure the static folder exists
