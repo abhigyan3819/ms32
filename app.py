@@ -64,11 +64,10 @@ def command():
                     tasks["tasks"] = [task for task in tasks["tasks"] if task["id"] != tasks_to_delete]
                     with open(tasks_file, "w") as file:
                         json.dump(tasks, file, indent=4)
-                        return "task removed"
+                        
                 with open(message_file, "w") as file:
                     file.write("")
-                    return "clear"
-        return cmd if cmd else "none"
+        return "none"
 
 @app.route("/audio", methods=["POST", "GET"])
 def sounds():
