@@ -59,7 +59,7 @@ def command():
                     exe = datetime.strptime(task["execution_time"], "%d-%m-%Y %H:%M")
                     exe = exe.strftime("%d-%m-%Y %H:%M")
                     now = datetime.now().strftime("%d-%m-%Y %H:%M")
-                    return [now,exe]
+                    return [datetime.now().strftime("%d-%m-%Y %H:%M"),exe]
                     if exe <= now:
                         cmd = task["cmd"]
                         tasks_to_delete = task["id"]
