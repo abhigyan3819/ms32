@@ -3,9 +3,11 @@ from time import time
 from flask import Flask, render_template, request, redirect, jsonify
 from datetime import datetime
 import json
+import pytz
 
 app = Flask(__name__)
 
+timezone = pytz.timezone("Asia/Kolkata")
 startTime = time()
 
 # Ensure the static folder exists
@@ -59,7 +61,7 @@ def command():
                     exe = datetime.strptime(task["execution_time"], "%d-%m-%Y %H:%M")
                     exe = exe.strftime("%d-%m-%Y %H:%M")
                     now = datetime.now().strftime("%d-%m-%Y %H:%M")
-                    return [datetime.now(ZoneInfo("Asia/Kolkata")).strftime("%d-%m-%Y %H:%M"),exe]
+                    return [datetime.now(timezone)).strftime("%d-%m-%Y %H:%M"),exe]
                     if exe <= now:
                         cmd = task["cmd"]
                         tasks_to_delete = task["id"]
@@ -140,7 +142,7 @@ def schedule():
     if request.method == "POST":
         data = {"tasks": []}
         cmd = request.form["task"]
-        current_time = datetime.now(ZoneInfo("Asia/Kolkata")).strftime("%d-%m-%Y %H:%M")
+        current_time = datetime.now(timezone).strftime("%d-%m-%Y %H:%M")
         try:
             # Adjust the parsing to support ISO 8601 format
             execution_time = datetime.strptime(request.form["task-datetime"], "%Y-%m-%dT%H:%M")
