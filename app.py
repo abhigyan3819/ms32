@@ -137,25 +137,37 @@ def schedule():
     if request.method == "POST":
         data = {"tasks": []}
         cmd = request.form["task"]
-        time = datetime.now().strftime("%d-%m-%Y %H:%M")
-        execution_time = datetime.strptime(request.form["task-datetime"], "%Y-%m-%d %H:%M")
+        current_time = datetime.now().strftime("%d-%m-%Y %H:%M")
+        try:
+            # Adjust the parsing to support ISO 8601 format
+            execution_time = datetime.strptime(request.form["task-datetime"], "%Y-%m-%dT%H:%M")
+        except ValueError as e:
+            return f"Invalid datetime format: {e}", 400
+
         tasks_file = os.path.join(STATIC_FOLDER, "tasks.json")
         try:
             if os.path.exists(tasks_file):
                 with open(tasks_file, "r") as file:
                     data = json.load(file)
-        except:
-            pass
+        except Exception as e:
+            return f"Error reading tasks.json: {e}", 500
+
         task = {
             "id": len(data["tasks"]),
             "cmd": cmd,
-            "time": time,
-            "execution_time": execution_time
+            "time": current_time,
+            "execution_time": execution_time.strftime("%d-%m-%Y %H:%M")
         }
         data["tasks"].append(task)
-        with open(tasks_file, "w") as file:
-            json.dump(data, file, indent=4)
+
+        try:
+            with open(tasks_file, "w") as file:
+                json.dump(data, file, indent=4)
+        except Exception as e:
+            return f"Error writing to tasks.json: {e}", 500
+
         return redirect("/")
+
 
 @app.route("/delete-task", methods=["POST", "GET"])
 def delete_task():
