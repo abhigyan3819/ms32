@@ -63,7 +63,6 @@ def command():
                     now = datetime.now(timezone).strftime("%d-%m-%Y %H:%M")
                     if exe <= now:
                         cmd = task["cmd"]
-                        return cmd
                         tasks_to_delete = task["id"]
                         break
                     else:return [now,exe]
