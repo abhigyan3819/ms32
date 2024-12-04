@@ -56,7 +56,6 @@ def command():
                     tasks = json.load(file)
                 tasks_to_delete = None
                 for task in tasks["tasks"]:
-                    return "checking"
                     exe = datetime.strptime(task["execution_time"], "%d-%m-%Y %H:%M")
                     exe = exe.strftime("%d-%m-%Y %H:%M")
                     now = datetime.now().strftime("%d-%m-%Y %H:%M")
