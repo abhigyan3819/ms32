@@ -63,8 +63,10 @@ def command():
                     now = datetime.now().strftime("%d-%m-%Y %H:%M")
                     if exe <= now:
                         cmd = task["cmd"]
+                        return cmd
                         tasks_to_delete = task["id"]
                         break
+                    else:return "not timed"
                 if tasks_to_delete is not None:
                     tasks["tasks"] = [task for task in tasks["tasks"] if task["id"] != tasks_to_delete]
                     with open(tasks_file, "w") as file:
