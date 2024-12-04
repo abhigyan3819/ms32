@@ -46,31 +46,25 @@ def command():
         cmd = ""
         message_file = os.path.join(STATIC_FOLDER, "message.txt")
         tasks_file = os.path.join(STATIC_FOLDER, "tasks.json")
-
         if os.path.exists(message_file):
             with open(message_file, "r") as file:
                 cmd = file.read()
-
         if cmd == "":
-            
             if os.path.exists(tasks_file):
                 with open(tasks_file, "r") as file:
                     tasks = json.load(file)
-                    
                 tasks_to_delete = None
                 for task in tasks["tasks"]:
-                    if datetime.strptime(task["execution_time"],strftime("%d-%m-%Y %H:%M")) <= datetime.now().strftime("%d-%m-%Y %H:%M"):
+                    if datetime.strptime(task["execution_time"], "%d-%m-%Y %H:%M") <= datetime.now():
                         cmd = task["cmd"]
                         tasks_to_delete = task["id"]
-                        
-                tasks["tasks"] = [task for task in tasks["tasks"] if task["id"] != tasks_to_delete]
-
-                with open(tasks_file, "w") as file:
-                    json.dump(tasks, file, indent=4)
-
-        with open(message_file, "w") as file:
-            file.write("")
-
+                        break
+                if tasks_to_delete is not None:
+                    tasks["tasks"] = [task for task in tasks["tasks"] if task["id"] != tasks_to_delete]
+                    with open(tasks_file, "w") as file:
+                        json.dump(tasks, file, indent=4)
+                with open(message_file, "w") as file:
+                    file.write("")
         return cmd
 
 @app.route("/audio", methods=["POST", "GET"])
