@@ -60,6 +60,7 @@ def command():
 
                 tasks_to_delete = None
                 for task in tasks["tasks"]:
+                    return task
                     if task["execution_time"] <= datetime.now().strftime("%d-%m-%Y %H:%M"):
                         cmd = task["cmd"]
                         
