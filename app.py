@@ -65,7 +65,7 @@ def command():
                         tasks_to_delete = task["id"]
                         return cmd
                     else:
-                        return "not timed"
+                        return "not"
                 tasks["tasks"] = [task for task in tasks["tasks"] if task["id"] != tasks_to_delete]
 
                 with open(tasks_file, "w") as file:
